@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script>
+        function fun(a) {
+            document.getElementById('t_res').value = a;
+        }
+        function fun1(a) {
+            document.getElementById('t_res2').value = a;
+        }
+    </script>
+</head>
+<body onLoad="fun('The page has been loaded');">
+<h3>Task 3.</h3>
+<form id="main_form">
+    <input type="text" size="50" value="onClick" onClick="fun('Text element clicked');"><br>
+    <input type="text" size="50" value="onChange" onChange="fun('Text field content changed');"><br>
+    <input type="text" size="50" id="t_res" onMouseOver="fun('Cursor is over the text element');" onMouseOut="fun('Cursor left the text element');"><br>
+    <input type="text" size="50" id="t_res2" onFocus="fun1('Element received focus');" onSelect="fun1('Text in the field selected');"><br>
+</form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+    <script>
+        function calculate() {
+            let x = parseFloat(document.getElementById('x_value').value);
+            let y = parseFloat(document.getElementById('y_value').value);
+            let F;
+
+            if (x < 10 || y != 3) {
+                F = 2 * Math.pow(x, 2) - 3 * Math.pow(y, 2);
+            }
+            else if (x != 2) {
+                F = 2 * x - (3 * y / x) + Math.pow(x, 2);
+            }
+            else {
+                F = Math.pow(x, 3) + 3 * x * y;
+            }
+
+            alert("Calculation result: " + F);
+        }
+    </script>
+</head>
+<body>
+<h3>Task 4.</h3>
+<form>
+    <label for="x_value">Enter value of x:</label>
+    <input type="text" id="x_value" name="x_value"><br><br>
+
+    <label for="y_value">Enter value of y:</label>
+    <input type="text" id="y_value" name="y_value"><br><br>
+
+    <input type="button" value="Calculate" onClick="calculate()">
+</form>
+</body>
+</html>

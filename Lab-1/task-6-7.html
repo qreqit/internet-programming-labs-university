@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+    <SCRIPT LANGUAGE='JavaScript'>
+        let product = ["Notebook", "Pen"];
+        let quantity = ["105", "200"];
+        let cost = ["26", "10.5"];
+        let selectedProductIndex = -1;
+
+        function fun1() {
+            let selectedProduct = document.form1.productSelect.value;
+            selectedProductIndex = product.indexOf(selectedProduct);
+
+            if (selectedProductIndex !== -1) {
+                document.form1.output_quantity.value = "Quantity: " + quantity[selectedProductIndex];
+                document.form1.output_cost.value = "Cost per unit: " + cost[selectedProductIndex] + " units";
+            } else {
+                document.form1.output_quantity.value = "Product not found";
+                document.form1.output_cost.value = "";
+            }
+        }
+
+        function fun2() {
+            if (selectedProductIndex !== -1) {
+                let total = quantity[selectedProductIndex] * cost[selectedProductIndex];
+                document.form1.output_total.value = "Total cost: " + total + " units";
+            } else {
+                document.form1.output_total.value = "Please select a valid product first";
+            }
+        }
+    </SCRIPT>
+</HEAD>
+<BODY>
+<FORM NAME="form1">
+    Select a product:
+    <SELECT NAME="productSelect">
+        <OPTION VALUE="Notebook">Notebook</OPTION>
+        <OPTION VALUE="Pen">Pen</OPTION>
+    </SELECT>
+    <BR><BR>
+
+    <INPUT TYPE="button" VALUE="Available quantity and cost" onClick="fun1()">
+    <BR><BR>
+
+    <INPUT TYPE="text" SIZE="70" NAME="output_quantity" readonly>
+    <BR>
+    <INPUT TYPE="text" SIZE="70" NAME="output_cost" readonly>
+    <BR><BR>
+
+    <INPUT TYPE="button" VALUE="Total sum" onClick="fun2()">
+    <BR><BR>
+
+    <INPUT TYPE="text" SIZE="70" NAME="output_total" readonly>
+</FORM>
+</BODY>
+</HTML>
