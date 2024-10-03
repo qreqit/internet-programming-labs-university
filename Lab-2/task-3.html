@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця для варіанту</title>
+    <script>
+        let str, stb;
+
+        function createTable() {
+            str = parseInt(document.getElementById("t_str").value);
+            stb = parseInt(document.getElementById("t_stb").value);
+            let res_str = "<table border='1'>\n";
+
+            for (let i = 1; i <= str; i++) {
+                res_str += "<tr>\n";
+                for (let j = 1; j <= stb; j++) {
+                    let value = 3 * i - 2 * j; // Формула для заповнення таблиці
+                    res_str += "<td><input type='text' id='cell_" + i + "_" + j + "' value='" + value + "' readonly></td>\n";
+                }
+                res_str += "</tr>\n";
+            }
+
+            res_str += "</table>";
+            document.getElementById("table_div").innerHTML = res_str;
+        }
+
+        function calculateSumThirdColumn() {
+            let sum = 0;
+            let stb = parseInt(document.getElementById("t_stb").value);
+            let str = parseInt(document.getElementById("t_str").value);
+
+            if (stb < 3) {
+                alert("Третій стовпець відсутній.");
+                return;
+            }
+
+            for (let i = 1; i <= str; i++) {
+                let value = parseInt(document.getElementById("cell_" + i + "_3").value);
+                sum += value;
+            }
+
+            alert("Сума елементів третього стовпця = " + sum);
+        }
+    </script>
+</head>
+<body>
+
+<h2>Калькулятор для таблиці</h2>
+
+<form id="main_form">
+    <table>
+        <tr>
+            <td>Кількість рядків</td>
+            <td><input type="text" id="t_str" value="5"></td>
+        </tr>
+        <tr>
+            <td>Кількість стовпців</td>
+            <td><input type="text" id="t_stb" value="5"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onClick="createTable()" value="Побудувати таблицю"></td>
+        </tr>
+        <tr>
+            <td><input type="button" onClick="calculateSumThirdColumn()" value="Підрахувати суму третього стовпця"></td>
+        </tr>
+    </table>
+</form>
+
+<div id="table_div"></div>
+
+</body>
+</html>

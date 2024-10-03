@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Метод console.log()</title>
+    <script>
+        window.onload = function() {
+            let a = 10;
+            let b = 3;
+            let remainder = a % b;
+            console.log("Остача від ділення", a, "на", b, "=", remainder);
+
+            let isDivisible = (a % b === 0);
+            console.log("Чи ділиться", a, "на", b, "без остачі? ->", isDivisible);
+
+            let arr = [1, 2, 3, 4, 5];
+            console.log("Масив: %o", arr);
+            console.log("Другий елемент масиву: %d", arr[1]);
+            console.log("Масив містить числа: %s", arr.join(", "));
+        }
+    </script>
+</head>
+<body>
+<h2>Перевірте консоль (F12 -> Console)</h2>
+</body>
+</html>

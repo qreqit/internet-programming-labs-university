@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дослідження методів console</title>
+  <script>
+    window.onload = function() {
+      // Метод console.info()
+      console.info("Це повідомлення для надання інформації.");
+
+      // Метод console.warn()
+      console.warn("Це попередження.");
+
+      // Метод console.error()
+      console.error("Це повідомлення про помилку.");
+
+      // Метод console.dir() — виводить властивості об'єкта
+      let obj = {name: "John", age: 30, city: "Kyiv"};
+      console.dir(obj);
+
+      // Метод console.dirxml() — виводить XML або DOM елемент у вигляді дерева
+      console.dirxml(document.body);
+
+      // Метод console.time() і console.timeEnd() — для вимірювання часу виконання
+      console.time("Timer");
+      for (let i = 0; i < 1000000; i++) {}
+      console.timeEnd("Timer");
+
+      // Метод console.profile() і console.profileEnd() — для профілювання коду (підтримується не у всіх браузерах)
+      console.profile("MyProfile");
+      for (let i = 0; i < 1000000; i++) {}
+      console.profileEnd("MyProfile");
+
+      // Метод console.assert() — виводить помилку, якщо умова є хибною
+      let x = 5;
+      console.assert(x > 10, "Значення x не більше 10");
+    };
+  </script>
+</head>
+<body>
+<h2>Перевірте консоль (F12 -> Console)</h2>
+</body>
+</html>
