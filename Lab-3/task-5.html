@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Арифметичні завдання</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    #result {
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    let totalQuestions = 5;
+    let currentQuestion = 0;
+    let correctAnswers = 0;
+    let currentAnswer = 0;
+
+    function generateQuestion() {
+      const num1 = Math.floor(Math.random() * 10);
+      const num2 = Math.floor(Math.random() * 10);
+      const operations = ['+', '-', '*', '/'];
+      const operation = operations[Math.floor(Math.random() * operations.length)];
+
+      switch (operation) {
+        case '+':
+          currentAnswer = num1 + num2;
+          break;
+        case '-':
+          currentAnswer = num1 - num2;
+          break;
+        case '*':
+          currentAnswer = num1 * num2;
+          break;
+        case '/':
+          currentAnswer = num1 / num2;
+          break;
+      }
+
+      document.getElementById('question').innerText = `${num1} ${operation} ${num2} = `;
+      document.getElementById('userAnswer').value = '';
+      document.getElementById('result').innerText = '';
+    }
+
+    function checkAnswer() {
+      const userAnswer = parseFloat(document.getElementById('userAnswer').value);
+      const resultText = document.getElementById('result');
+
+      if (userAnswer === currentAnswer) {
+        correctAnswers++;
+        resultText.innerText = "Правильно!";
+      } else {
+        resultText.innerText = `Помилка, правильна відповідь «${currentAnswer}»`;
+      }
+
+      currentQuestion++;
+      if (currentQuestion < totalQuestions) {
+        setTimeout(generateQuestion, 2000);
+      } else {
+        showFinalScore();
+      }
+    }
+
+    function showFinalScore() {
+      const scorePercentage = (correctAnswers / totalQuestions) * 100;
+      document.getElementById('question').innerText = `Загальний рахунок: ${scorePercentage}% (${correctAnswers} правильних відповідей з ${totalQuestions})`;
+      document.getElementById('userAnswer').style.display = 'none';
+      document.getElementById('checkButton').style.display = 'none';
+      document.getElementById('nextButton').style.display = 'none';
+    }
+
+    window.onload = function() {
+      generateQuestion();
+    };
+  </script>
+</head>
+<body>
+<h1>Перевірте свої знання арифметики!</h1>
+<div id="question"></div>
+<input type="number" id="userAnswer" placeholder="Введіть вашу відповідь">
+<div id="result"></div>
+<button id="checkButton" onclick="checkAnswer()">Перевірити</button>
+<button id="nextButton" onclick="generateQuestion()" style="display: none;">Наступне завдання</button>
+</body>
+</html>

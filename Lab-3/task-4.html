@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Перегляд зображень</title>
+    <style>
+        #imageContainer {
+            text-align: center;
+            margin: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+    <script>
+        let images = ['image1.gif', 'image2.gif', 'image3.gif'];
+        let currentIndex = 0;
+
+        function showImage() {
+            const displayedImage = document.getElementById('displayedImage');
+            displayedImage.src = images[currentIndex];
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage();
+        }
+
+        window.onload = function() {
+            showImage();
+        };
+    </script>
+</head>
+<body>
+<div id="imageContainer">
+    <img id="displayedImage" src="" alt="Image Viewer">
+</div>
+<div>
+    <button onclick="prevImage()">Назад</button>
+    <button onclick="nextImage()">Вперед</button>
+</div>
+</body>
+</html>

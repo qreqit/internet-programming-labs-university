@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Розрахунок площі опуклого чотирикутника</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: inline-block;
+            width: 150px;
+        }
+        .input-group input {
+            width: 100px;
+        }
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>Розрахунок площі опуклого чотирикутника</h2>
+
+<div class="input-group">
+    <label for="a">Сторона a:</label>
+    <input type="number" id="a" oninput="calculateArea()">
+</div>
+
+<div class="input-group">
+    <label for="b">Сторона b:</label>
+    <input type="number" id="b" oninput="calculateArea()">
+</div>
+
+<div class="input-group">
+    <label for="c">Сторона c:</label>
+    <input type="number" id="c" oninput="calculateArea()">
+</div>
+
+<div class="input-group">
+    <label for="d">Сторона d:</label>
+    <input type="number" id="d" oninput="calculateArea()">
+</div>
+
+<div class="input-group">
+    <label for="theta">Кут θ (градуси):</label>
+    <input type="number" id="theta" oninput="calculateArea()">
+</div>
+
+<h3>Площа: <span id="result">0</span> квадратних одиниць</h3>
+
+<script>
+    function calculateArea() {
+        let a = parseFloat(document.getElementById('a').value);
+        let b = parseFloat(document.getElementById('b').value);
+        let c = parseFloat(document.getElementById('c').value);
+        let d = parseFloat(document.getElementById('d').value);
+        let theta = parseFloat(document.getElementById('theta').value);
+
+        if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d) || isNaN(theta)) {
+            document.getElementById('result').innerText = '0';
+            return;
+        }
+
+        let s = (a + b + c + d) / 2;
+
+        let thetaRadians = theta * (Math.PI / 180);
+
+        let area = Math.sqrt((s - a) * (s - b) * (s - c) * (s - d) - (a * b * c * d * Math.pow(Math.cos(thetaRadians / 2), 2)));
+
+        document.getElementById('result').innerText = area.toFixed(2);
+    }
+</script>
+</body>
+</html>

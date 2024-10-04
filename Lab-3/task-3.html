@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Екранна клавіатура</title>
+    <script>
+        let language = "ua";
+        const letters_ua = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'];
+        const letters_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+        function createKeyboard(letters) {
+            let keys = "<div>";
+            const digits = "1234567890";
+            for (let i = 0; i < digits.length; i++) {
+                keys += `<button onclick="addSymbol('${digits[i]}')">${digits[i]}</button>`;
+            }
+            keys += "<br>";
+
+            letters.forEach((letter, index) => {
+                if (index % 11 === 0 && index !== 0) {
+                    keys += "<br>";
+                }
+                keys += `<button onclick="addSymbol('${letter}')">${letter}</button>`;
+            });
+
+            keys += "</div>";
+            document.getElementById('screenKeyboard').innerHTML = keys;
+        }
+
+        function addSymbol(symbol) {
+            document.getElementById('display').value += symbol;
+        }
+
+        function cleanDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function toggleLanguage() {
+            language = language === "ua" ? "en" : "ua";
+            const letters = language === "ua" ? letters_ua : letters_en;
+            createKeyboard(letters);
+        }
+    </script>
+</head>
+<body onload="createKeyboard(letters_ua)">
+<div>
+    <textarea id="display" rows="5" cols="50"></textarea>
+</div>
+<div id="screenKeyboard"></div>
+<br>
+<button onclick="cleanDisplay()">Очистити поле</button>
+<button onclick="toggleLanguage()">Alt+Shift</button>
+</body>
+</html>

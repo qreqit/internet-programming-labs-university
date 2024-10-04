@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Екранна клавіатура</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .keyboard {
+            margin: 20px 0;
+        }
+        .keyboard-row {
+            margin-bottom: 10px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #clear-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h2>Екранна клавіатура</h2>
+
+<textarea id="text-field" readonly></textarea>
+
+<div class="keyboard">
+    <div class="keyboard-row" id="number-row"></div>
+
+    <div class="keyboard-row" id="letter-row-1"></div>
+    <div class="keyboard-row" id="letter-row-2"></div>
+    <div class="keyboard-row" id="letter-row-3"></div>
+</div>
+
+<button id="clear-button">Очистити поле</button>
+
+<script>
+    let numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    let letters = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'];
+
+    let textField = document.getElementById('text-field');
+
+    function createButton(content) {
+        let button = document.createElement('button');
+        button.innerText = content;
+        button.onclick = function() {
+            textField.value += content;
+        };
+        return button;
+    }
+
+    let numberRow = document.getElementById('number-row');
+    numbers.forEach(function(number) {
+        numberRow.appendChild(createButton(number));
+    });
+
+    let letterRow1 = document.getElementById('letter-row-1');
+    let letterRow2 = document.getElementById('letter-row-2');
+    let letterRow3 = document.getElementById('letter-row-3');
+
+    letters.slice(0, 9).forEach(function(letter) {
+        letterRow1.appendChild(createButton(letter));
+    });
+
+    letters.slice(9, 19).forEach(function(letter) {
+        letterRow2.appendChild(createButton(letter));
+    });
+
+    letters.slice(19).forEach(function(letter) {
+        letterRow3.appendChild(createButton(letter));
+    });
+
+    document.getElementById('clear-button').onclick = function() {
+        textField.value = '';
+    };
+</script>
+</body>
+</html>
