@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестування Гачімучі</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Тест на тему Гачімучі</h1>
+<form id="testForm">
+    <h3>1. Хто є легендарним гуру тренувань і мотивації у світі гачімучі?</h3>
+    <input type="radio" name="q1" value="0"> Чак Норріс<br>
+    <input type="radio" name="q1" value="0"> Арнольд Шварценеггер<br>
+    <input type="radio" name="q1" value="1"> Біллі Геррінгтон<br>
+    <input type="radio" name="q1" value="0"> Джон Сіна<br>
+
+    <h3>2. Що завжди повторює Біллі Геррінгтон під час тренувань?</h3>
+    <input type="radio" name="q2" value="0"> "Додай більше ваги!"<br>
+    <input type="radio" name="q2" value="0"> "Скоріше бігай!"<br>
+    <input type="radio" name="q2" value="1"> "Скоріш за все, ти вже програв!"<br>
+    <input type="radio" name="q2" value="0"> "Треба більше присідань!"<br>
+
+    <h3>3. Що найважливіше під час тренувань за методом гачімучі?</h3>
+    <input type="checkbox" name="q3" value="1"> Повна віддача<br>
+    <input type="checkbox" name="q3" value="0"> Час на соцмережі<br>
+    <input type="checkbox" name="q3" value="1"> Взаємоповага<br>
+    <input type="checkbox" name="q3" value="0"> Лінь<br>
+
+    <h3>4. Яка музика супроводжує тренування гачімучі?</h3>
+    <input type="checkbox" name="q4" value="1"> Інтенсивні техно-біти<br>
+    <input type="checkbox" name="q4" value="0"> Класична музика<br>
+    <input type="checkbox" name="q4" value="1"> Рок і важкий метал<br>
+    <input type="checkbox" name="q4" value="0"> Джаз і блюз<br>
+
+    <h3>5. Виберіть правильний варіант зі списку:</h3>
+    <select name="q5">
+        <option value="0">Легке тренування</option>
+        <option value="1">Інтенсивне тренування</option>
+        <option value="0">Мінімум зусиль</option>
+        <option value="0">Відпочинок замість тренування</option>
+    </select><br><br>
+
+    <h3>6. Які речі є обов'язковими для тренування у стилі гачімучі?</h3>
+    <select name="q6" multiple>
+        <option value="1">Боротьба з суперниками</option>
+        <option value="0">Гамбургери</option>
+        <option value="1">Мотивація</option>
+        <option value="0">Пікніки на природі</option>
+    </select><br><br>
+
+    <h3>7. Напишіть своє мотиваційне гасло для тренувань:</h3>
+    <input type="text" name="q7" placeholder="Ваш текст тут"><br><br>
+
+    <input type="button" value="Завершити тестування" onclick="processResults()">
+</form>
+
+<div id="results"></div>
+
+<script>
+    function processResults() {
+        let totalScore = 0;
+        let resultsHTML = "<table><tr><th>Запитання</th><th>Ваша відповідь</th><th>Отримані бали</th></tr>";
+
+        let q1 = document.querySelector('input[name="q1"]:checked');
+        if (q1) {
+            let score = parseInt(q1.value);
+            totalScore += score;
+            resultsHTML += `<tr><td>1. Гуру тренувань</td><td>${q1.nextSibling.textContent.trim()}</td><td>${score}</td></tr>`;
+        }
+
+        let q2 = document.querySelector('input[name="q2"]:checked');
+        if (q2) {
+            let score = parseInt(q2.value);
+            totalScore += score;
+            resultsHTML += `<tr><td>2. Фраза Біллі</td><td>${q2.nextSibling.textContent.trim()}</td><td>${score}</td></tr>`;
+        }
+
+        let q3score = 0;
+        let q3answers = [];
+        let q3checkboxes = document.querySelectorAll('input[name="q3"]:checked');
+        if (q3checkboxes.length === 2) { // Тільки якщо обрано рівно 2 варіанти
+            q3checkboxes.forEach(checkbox => {
+                q3answers.push(checkbox.nextSibling.textContent.trim());
+                q3score += parseInt(checkbox.value);
+            });
+        }
+        totalScore += q3score;
+        resultsHTML += `<tr><td>3. Важливі аспекти тренувань</td><td>${q3answers.join(', ')}</td><td>${q3score}</td></tr>`;
+
+        let q4score = 0;
+        let q4answers = [];
+        let q4checkboxes = document.querySelectorAll('input[name="q4"]:checked');
+        if (q4checkboxes.length === 2) { // Тільки якщо обрано рівно 2 варіанти
+            q4checkboxes.forEach(checkbox => {
+                q4answers.push(checkbox.nextSibling.textContent.trim());
+                q4score += parseInt(checkbox.value);
+            });
+        }
+        totalScore += q4score;
+        resultsHTML += `<tr><td>4. Музика для тренувань</td><td>${q4answers.join(', ')}</td><td>${q4score}</td></tr>`;
+
+        let q5 = document.querySelector('select[name="q5"]');
+        let q5score = parseInt(q5.value);
+        totalScore += q5score;
+        resultsHTML += `<tr><td>5. Інтенсивність тренування</td><td>${q5.options[q5.selectedIndex].text}</td><td>${q5score}</td></tr>`;
+
+        let q6score = 0;
+        let q6answers = [];
+        let q6selected = document.querySelectorAll('select[name="q6"] option:checked');
+        if (q6selected.length === 2) { // Тільки якщо обрано рівно 2 варіанти
+            q6selected.forEach(option => {
+                q6answers.push(option.textContent.trim());
+                q6score += parseInt(option.value);
+            });
+        }
+        totalScore += q6score;
+        resultsHTML += `<tr><td>6. Обов'язкові речі</td><td>${q6answers.join(', ')}</td><td>${q6score}</td></tr>`;
+
+        let q7 = document.querySelector('input[name="q7"]').value;
+        resultsHTML += `<tr><td>7. Мотиваційне гасло</td><td>${q7}</td><td>-</td></tr>`;
+
+        resultsHTML += `<tr><td colspan="2">Загальний бал</td><td>${totalScore}</td></tr>`;
+        resultsHTML += "</table>";
+
+        document.getElementById("results").innerHTML = resultsHTML;
+    }
+</script>
+</body>
+</html>
