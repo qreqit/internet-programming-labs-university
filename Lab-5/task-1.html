@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Завдання 2</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+
+        a {
+            display: block;
+            text-align: right;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #1a73e8;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .vertical_menu {
+            width: 200px;
+        }
+
+        .menu_items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu_items > li {
+            position: relative;
+        }
+
+        .menu_items a {
+            display: block;
+            padding: 10px;
+            background-color: #4682b4;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            position: relative;
+        }
+
+        .menu_items a:hover {
+            background-color: #5f9ea0;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .submenu li {
+            position: relative;
+        }
+
+        .submenu a {
+            background-color: #3cb371;
+            color: white;
+            padding: 10px;
+            width: 180px;
+        }
+
+        .submenu a:hover {
+            background-color: #2e8b57;
+        }
+
+        .submenu .submenu {
+            left: 200px;
+            top: 0;
+        }
+
+        .submenu .submenu a {
+            background-color: #ff8c00;
+        }
+
+        .submenu .submenu a:hover {
+            background-color: #ff6347;
+        }
+
+        .submenu-indicator {
+            float: right;
+        }
+
+        .active {
+            background-color: #1e90ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<a href="../../../index.html">На головну</a>
+<a href="../lab5.html">Лабораторна робота 5</a>
+
+<div id="menu" class="vertical_menu">
+    <ul class="menu_items">
+        <li class="has-submenu">
+            <a href="javascript:menuSwitch('item_1');" id="item_1"><span class="submenu-indicator">&#9654;</span> Пункт 1</a>
+            <ul class="submenu">
+                <li><a id="item_1_1">Пункт 1.1</a></li>
+                <li><a id="item_1_2">Пункт 1.2</a></li>
+            </ul>
+        </li>
+        <li class="has-submenu">
+            <a href="javascript:menuSwitch('item_2');" id="item_2"><span class="submenu-indicator">&#9654;</span> Пункт 2</a>
+            <ul class="submenu">
+                <li><a id="item_2_1">Пункт 2.1</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:menuSwitch('item_2_2');" id="item_2_2"><span class="submenu-indicator">&#9654;</span> Пункт 2.2</a>
+                    <ul class="submenu">
+                        <li><a id="item_2_2_1">Пункт 2.2.1</a></li>
+                        <li><a id="item_2_2_2">Пункт 2.2.2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a id="item_3">Пункт 3</a></li>
+    </ul>
+</div>
+
+<script>
+    function menuSwitch(menu_item) {
+        document.querySelectorAll('.menu_items a').forEach(item => item.classList.remove('active'));
+
+        const currentItem = document.getElementById(menu_item);
+        currentItem.classList.add('active');
+
+        const submenu = currentItem.nextElementSibling;
+        if (submenu && submenu.classList.contains('submenu')) {
+            const isVisible = submenu.style.display === 'block';
+            submenu.style.display = isVisible ? 'none' : 'block';
+
+            const indicator = currentItem.querySelector('.submenu-indicator');
+            if (indicator) {
+                indicator.innerHTML = isVisible ? '&#9654;' : '&#9660;';
+            }
+        }
+
+        document.querySelectorAll('.submenu').forEach(sub => {
+            if (sub !== submenu && !sub.contains(currentItem)) {
+                sub.style.display = 'none';
+                const parentItem = sub.previousElementSibling;
+                if (parentItem) {
+                    const parentIndicator = parentItem.querySelector('.submenu-indicator');
+                    if (parentIndicator) {
+                        parentIndicator.innerHTML = '&#9654;';
+                    }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
