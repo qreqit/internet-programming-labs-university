@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 3</title>
+</head>
+<body>
+
+<h1>Завдання 3</h1>
+
+<div>
+  <h2>3.1. Перетворення з Snake case у Camel case</h2>
+  <input type="text" id="snakeInput" placeholder="Введіть Snake case (напр. my_variable)">
+  <button onclick="toCamelCase()">Перетворити</button>
+  <p id="camelOutput"></p>
+</div>
+
+<div>
+  <h2>3.2. Перетворення з Camel case у Snake case</h2>
+  <input type="text" id="camelInput" placeholder="Введіть Camel case (напр. myVariable)">
+  <button onclick="toSnakeCase()">Перетворити</button>
+  <p id="snakeOutput"></p>
+</div>
+
+<div>
+  <h2>3.3. Заміна дат формату yyyy/mm/dd на dd.mm.yyyy</h2>
+  <textarea id="textInput" placeholder="Введіть текст з датами" rows="5" cols="40"></textarea><br>
+  <button onclick="replaceDates()">Змінити дати</button>
+  <p id="dateOutput"></p>
+</div>
+
+<script>
+  function toCamelCase() {
+    const snakeInput = document.getElementById("snakeInput").value;
+    const result = snakeInput.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    document.getElementById("camelOutput").innerText = `Результат: ${result}`;
+  }
+
+  function toSnakeCase() {
+    const camelInput = document.getElementById("camelInput").value;
+    const result = camelInput.replace(/([A-Z])/g, '_$1').toLowerCase();
+    document.getElementById("snakeOutput").innerText = `Результат: ${result}`;
+  }
+
+  function replaceDates() {
+    const text = document.getElementById("textInput").value;
+    const result = text.replace(/(\d{4})\/(\d{2})\/(\d{2})/g, '$3.$2.$1');
+    document.getElementById("dateOutput").innerText = `Результат: ${result}`;
+  }
+</script>
+
+</body>
+</html>

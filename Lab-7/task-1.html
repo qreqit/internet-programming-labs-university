@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 1</title>
+</head>
+<body>
+
+<h1>Завдання 1</h1>
+
+<div>
+  <h2>1.1. Обернення послідовності чисел</h2>
+  <input type="text" id="numberInput" placeholder="Введіть числа через пробіл">
+  <button onclick="displayReversedNumbers()">Обрати</button>
+  <p id="reversedNumbersOutput"></p>
+</div>
+
+<div>
+  <h2>1.2. Видалення нульових значень з масиву</h2>
+  <input type="text" id="zeroArrayInput" placeholder="Введіть масив чисел через пробіл">
+  <button onclick="displayNoZeros()">Обрати</button>
+  <p id="noZerosOutput"></p>
+</div>
+
+<div>
+  <h2>1.3. Обернення рядка</h2>
+  <input type="text" id="stringInput" placeholder="Введіть рядок">
+  <button onclick="displayReversedString()">Обрати</button>
+  <p id="reversedStringOutput"></p>
+</div>
+
+<div>
+  <h2>1.4. Заміна слів у рядку</h2>
+  <input type="text" id="replaceInput" value="Я не люблю морозиво">
+  <button onclick="displayReplacedString()">Обрати</button>
+  <p id="replacedStringOutput"></p>
+</div>
+
+<script>
+  function reverseNumbers(numbers) {
+    return numbers.split(' ').reverse().join(' ');
+  }
+
+  function no_zeros(arr) {
+    return arr.filter(num => num !== 0);
+  }
+
+  function reverser(str) {
+    return str.split('').reverse().join('');
+  }
+
+  function replace(str) {
+    let words = str.split(' ');
+    if (words.length >= 3) {
+      [words[1], words[2]] = [words[2], words[1]];
+    }
+    return words.join(', ');
+  }
+
+  function displayReversedNumbers() {
+    const input = document.getElementById("numberInput").value;
+    const result = reverseNumbers(input);
+    document.getElementById("reversedNumbersOutput").innerText = result;
+  }
+
+  function displayNoZeros() {
+    const input = document.getElementById("zeroArrayInput").value.split(' ').map(Number);
+    const result = no_zeros(input);
+    document.getElementById("noZerosOutput").innerText = result;
+  }
+
+  function displayReversedString() {
+    const input = document.getElementById("stringInput").value;
+    const result = reverser(input);
+    document.getElementById("reversedStringOutput").innerText = result;
+  }
+
+  function displayReplacedString() {
+    const input = document.getElementById("replaceInput").value;
+    const result = replace(input);
+    document.getElementById("replacedStringOutput").innerText = result;
+  }
+</script>
+
+</body>
+</html>
