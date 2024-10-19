@@ -1,18 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вивід e-mail</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Перевірка E-mail</title>
 </head>
 <body>
+
+<h2>Перевірка e-mail</h2>
+
+<label for="email-input">Введіть e-mail:</label>
+<input type="text" id="email-input" placeholder="example@mail.com">
+<button onclick="checkEmail()">Перевірити</button>
+
+<div id="result"></div>
+
 <script>
-    let s = "dwbyu@mail.ua";
-    let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
-    let a = s.match(r);
-    for (let i = 0; i < a.length; i++) {
-        document.writeln("<hr> a[" + i + "] " + a[i]);
+    function checkEmail() {
+        let email = document.getElementById('email-input').value;
+        let regex = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+
+        let resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = "";
+
+        let match = email.match(regex);
+
+        if (match !== null) {
+            for (let i = 0; i < match.length; i++) {
+                resultDiv.innerHTML += `<hr> Частина [${i}]: ${match[i]}`;
+            }
+        } else {
+            resultDiv.innerHTML = "<hr>Невірний формат e-mail.";
+        }
     }
 </script>
+
 </body>
 </html>

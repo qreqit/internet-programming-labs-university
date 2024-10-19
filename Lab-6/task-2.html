@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Форма з перевіркою</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input.valid {
+            border-color: green;
+        }
+
+        input.invalid {
+            border-color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        .valid-mark {
+            display: none;
+            color: green;
+        }
+
+        .valid-mark.visible {
+            display: inline;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Заповніть форму</h2>
+
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="text" id="email" placeholder="example@pnu.edu.ua">
+        <span class="valid-mark">✔</span>
+        <div class="error-message">Введіть правильний e-mail (example@pnu.edu.ua)</div>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Ім’я та прізвище</label>
+        <input type="text" id="name" placeholder="Ім’я Прізвище">
+        <span class="valid-mark">✔</span>
+        <div class="error-message">Ім'я повинно починатися з великої, прізвище — всі великі літери.</div>
+    </div>
+
+    <div class="form-group">
+        <label for="login">Логін</label>
+        <input type="text" id="login" placeholder="login123">
+        <span class="valid-mark">✔</span>
+        <div class="error-message">Логін повинен містити лише латинські літери та цифри.</div>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" id="password" placeholder="********">
+        <span class="valid-mark">✔</span>
+        <div class="error-message">Пароль має містити мінімум 8 символів, включаючи букви, цифри та спецсимволи.</div>
+    </div>
+
+    <div class="form-group">
+        <label for="postal">Поштовий індекс</label>
+        <input type="text" id="postal" placeholder="12345">
+        <span class="valid-mark">✔</span>
+        <div class="error-message">Поштовий індекс повинен містити 5 цифр.</div>
+    </div>
+
+    <button onclick="validateForm()">Перевірити</button>
+</div>
+
+<script>
+    function validateForm() {
+        // Валідація e-mail
+        let email = document.getElementById('email');
+        let emailRegex = /^[a-z0-9._%+-]+@pnu\.edu\.ua$/i;
+        validateField(email, emailRegex, "Введіть правильний e-mail (example@pnu.edu.ua)");
+
+        // Валідація імені та прізвища
+        let name = document.getElementById('name');
+        let nameRegex = /^[А-ЯA-Z][а-яa-z]+ [А-ЯA-Z]+$/;
+        validateField(name, nameRegex, "Ім'я з великої, прізвище — всі великі.");
+
+        // Валідація логіну
+        let login = document.getElementById('login');
+        let loginRegex = /^[a-zA-Z0-9]+$/;
+        validateField(login, loginRegex, "Логін повинен містити лише латинські літери.");
+
+        // Валідація паролю
+        let password = document.getElementById('password');
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_\-!@#$%^&*])[A-Za-z\d_\-!@#$%^&*]{8,}$/;
+        validateField(password, passwordRegex, "Пароль має містити мінімум 8 символів.");
+
+        // Валідація поштового індексу
+        let postal = document.getElementById('postal');
+        let postalRegex = /^\d{5}$/;
+        validateField(postal, postalRegex, "Поштовий індекс повинен містити 5 цифр.");
+    }
+
+    // Функція для перевірки поля за регулярним виразом
+    function validateField(input, regex, errorMessage) {
+        let value = input.value;
+        let validMark = input.nextElementSibling;
+        let errorDiv = input.parentElement.querySelector('.error-message');
+
+        if (regex.test(value)) {
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+            errorDiv.classList.remove('visible');
+            validMark.classList.add('visible');
+        } else {
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+            errorDiv.textContent = errorMessage;
+            errorDiv.classList.add('visible');
+            validMark.classList.remove('visible');
+        }
+    }
+</script>
+
+</body>
+</html>
