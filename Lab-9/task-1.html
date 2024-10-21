@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анімація за допомогою setInterval</title>
+    <style>
+        #box {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+<script>
+    let box = document.getElementById('box');
+    let position = 0;
+    let interval = setInterval(moveBox, 10);
+
+    function moveBox() {
+        if (position >= 300) {
+            clearInterval(interval);
+        } else {
+            position++;
+            box.style.left = position + 'px';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Анімований логотип</title>
+  <style>
+    #logo {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      border-radius: 50%;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+    }
+
+    .hidden {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .visible {
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+<div id="logo" class="hidden">ІПЗ</div>
+<button id="toggleButton">Запустити/Зупинити анімацію</button>
+
+<script>
+  let logo = document.getElementById('logo');
+  let button = document.getElementById('toggleButton');
+  let isAnimating = false;
+  let position = 50;
+  let size = 100;
+  let direction = 1;
+  let animationId;
+
+  function animateLogo() {
+    if (position >= 300 || position <= 50) {
+      direction *= -1;
+    }
+    position += 2 * direction;
+    size += 1 * direction;
+    logo.style.top = position + 'px';
+    logo.style.width = size + 'px';
+    logo.style.height = size + 'px';
+
+    if (isAnimating) {
+      animationId = requestAnimationFrame(animateLogo);
+    }
+  }
+
+  button.addEventListener('click', function () {
+    if (isAnimating) {
+      cancelAnimationFrame(animationId);
+      logo.classList.add('hidden');
+    } else {
+      logo.classList.remove('hidden');
+      logo.classList.add('visible');
+      animateLogo();
+    }
+    isAnimating = !isAnimating;
+  });
+</script>
+
+</body>
+</html>

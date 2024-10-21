@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анімація з requestAnimationFrame</title>
+    <style>
+        #circle {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="circle"></div>
+
+<script>
+    let circle = document.getElementById('circle');
+    let position = 0;
+
+    function moveCircle() {
+        if (position >= 300) {
+            return;
+        }
+        position++;
+        circle.style.left = position + 'px';
+        requestAnimationFrame(moveCircle);
+    }
+
+    requestAnimationFrame(moveCircle);
+</script>
+
+</body>
+</html>
