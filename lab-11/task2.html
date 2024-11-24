@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Завдання 2</title>
+	<script src="../js/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#wrapInnerBtn").on("click", function () {
+				$("#originalBox").wrapInner(
+						"<div class='inner-wrapper' style='border: 1px solid #FF6347; padding: 5px;'></div>"
+				);
+			});
+
+			$("#cloneBtn").on("click", function () {
+				const clonedBox = $("#originalBox").clone().addClass("cloned");
+				clonedBox.insertAfter("#originalBox");
+			});
+
+			$("#innerHeightBtn").on("click", function () {
+				$("#originalBox").innerHeight(function (index, height) {
+					alert("Поточна внутрішня висота: " + height + "px");
+					return height + 20;
+				});
+			});
+
+			$("#outerHeightBtn").on("click", function () {
+				const outerHeight = $("#originalBox").outerHeight();
+				alert("Зовнішня висота (з padding і border): " + outerHeight + "px");
+			});
+		});
+	</script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+			line-height: 1.6;
+		}
+
+		a {
+			display: block;
+			text-align: right;
+			margin-bottom: 10px;
+			text-decoration: none;
+			color: #007BFF;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		.box {
+			width: 300px;
+			padding: 10px;
+			border: 1px solid #000;
+			margin-bottom: 20px;
+			background-color: #f9f9f9;
+		}
+
+		button {
+			margin: 5px 0;
+			padding: 10px 15px;
+			border: none;
+			background-color: #007BFF;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+
+		.inner-wrapper {
+			background-color: #fff7f7;
+		}
+
+		.cloned {
+			border-color: #FF6347;
+		}
+	</style>
+</head>
+<body>
+<a href="../../index.html">На головну</a>
+<a href="index-lab-11.html">Лабораторна робота 11</a>
+
+<div class="box" id="originalBox">
+	<p>Це оригінальний елемент</p>
+</div>
+
+<button id="wrapInnerBtn">.wrapInner()</button>
+<button id="cloneBtn">.clone()</button>
+<button id="innerHeightBtn">.innerHeight()</button>
+<button id="outerHeightBtn">.outerHeight()</button>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="uk">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Завдання 1</title>
+	<script src="../js/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#changeHTML").on("click", function () {
+				$(".title").html("New Heading Text");
+			});
+
+			$("#applyCSS").on("click", function () {
+				$(".title").css({
+					"color": "blue",
+					"font-size": "24px",
+					"font-weight": "bold"
+				});
+			});
+
+			$("#changeValue").on("click", function () {
+				$("#nameInput").val("Changed value");
+			});
+
+			$("#setAttr").on("click", function () {
+				alert("Значення атрибуту id: " + $("#nameInput").attr("id"));
+				$("#nameInput")
+						.attr("placeholder", "Placeholder")
+						.attr({
+							"some-data": "123",
+							"title": "Title"
+						})
+						.attr("title", function (index, currentValue) {
+							return currentValue + " (changed)";
+						});
+			});
+
+			$("#removeAttr").on("click", function () {
+				$("#nameInput")
+						.removeAttr("some-data")
+						.removeAttr("title")
+						.removeAttr("placeholder");
+			});
+		});
+	</script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+			line-height: 1.6;
+		}
+
+		a {
+			display: block;
+			text-align: right;
+			margin-bottom: 10px;
+			text-decoration: none;
+			color: #007BFF;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		#content {
+			margin-bottom: 20px;
+		}
+
+		button {
+			margin: 5px 0;
+			padding: 10px 15px;
+			border: none;
+			background-color: #007BFF;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+	</style>
+</head>
+<body>
+<a href="../../index.html">На головну</a>
+<a href="index-lab-11.html">Лабораторна робота 11</a>
+
+<div id="content">
+	<h1 class="title">Hello, World!</h1>
+	<p class="description">This is a description.</p>
+	<input type="text" id="nameInput" value="Initial Value">
+</div>
+
+<button id="changeHTML">Змінити текст заголовка</button>
+<button id="applyCSS">Застосувати стилі</button>
+<button id="changeValue">Змінити значення інпуту</button>
+<button id="setAttr">Встановити атрибути</button>
+<button id="removeAttr">Видалити атрибути</button>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Завдання 5</title>
+	<script src="../js/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#typeBtn").click(function () {
+				const types = [
+					$.type(123),
+					$.type("Привіт"),
+					$.type(true),
+					$.type([1, 2, 3]),
+					$.type({key: "value"})
+				];
+				alert("Типи значень: " + types.join(", "));
+			});
+
+			$("#uniqueSortBtn").click(function () {
+				let divs = $(".box, .unique").get();
+				divs = divs.concat($(".unique").get());
+				let elements = $(divs);
+				let uniqueSortedElements = elements.uniqueSort();
+				alert("Перед сортуванням: " + elements.length + ", після: " + uniqueSortedElements.length)
+			});
+
+			$("#containsBtn").click(function () {
+				const parent = $("#content")[0];
+				const child = $(".text")[0];
+				const result = $.contains(parent, child);
+				alert("Чи містить #content елемент .text? " + result);
+			});
+
+			$("#dataBtn").click(function () {
+				const dataInfo = $("#dataElement").data("info");
+				const dataValue = $("#dataElement").data("value");
+				alert("Отримані дані: info = " + dataInfo + ", value = " + dataValue);
+			});
+		});
+	</script>
+</head>
+<body>
+<a style="display: block; text-align: right;" href="../../index.html">На головну</a>
+<a style="display: block; text-align: right;" href="index-lab-11.html">Лабораторна робота 11</a>
+
+<h2>Демонстрація різних методів jQuery</h2>
+
+<button id="typeBtn">type()</button>
+<button id="uniqueSortBtn">uniqueSort()</button>
+<button id="containsBtn">contains()</button>
+<button id="dataBtn">data()</button>
+
+<div class="box">Div 1</div>
+<div class="box">Div 2</div>
+<div class="box">Div 3</div>
+<div class="unique">Унікальний div</div>
+<div class="box">Div 4</div>
+
+<div id="content">
+	<p class="text">Цей елемент міститься в батьківському елементі.</p>
+</div>
+
+<div id="dataElement" data-info="Збережені дані" data-value="42"></div>
+</body>
+</html>

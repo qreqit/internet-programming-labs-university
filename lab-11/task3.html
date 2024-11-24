@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Завдання 3</title>
+	<style>
+		.container {
+			padding: 20px;
+			border: 2px solid #444;
+			margin: 20px auto;
+			width: 80%;
+			max-width: 600px;
+			background-color: #f9f9f9;
+		}
+
+		.box {
+			padding: 10px;
+			border: 1px solid #888;
+			margin: 5px;
+			text-align: center;
+			background-color: #fff;
+		}
+
+		.highlight {
+			background-color: #FFE4B5;
+			font-weight: bold;
+		}
+	</style>
+	<script src="../js/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#endBtn").on("click", function () {
+				$(".box")
+						.first()
+						.css("background-color", "yellow")
+						.end()
+						.css("border", "2px solid red");
+				alert("Метод .end() повернув вибір до всіх .box елементів.");
+			});
+
+			$("#firstBtn").on("click", function () {
+				$(".box").first().addClass("highlight");
+				alert("Перший .box елемент підсвічено.");
+			});
+
+			$("#offsetParentBtn").on("click", function () {
+				const offsetParent = $("#parentContainer .box").first().offsetParent();
+				offsetParent.css("border", "3px dashed blue");
+				alert("Найближчий позиціонований батько виділений синім.");
+			});
+
+			$("#findBtn").on("click", function () {
+				const innerBoxes = $("#parentContainer").find(".box");
+				innerBoxes.css("color", "blue");
+				alert("Всі вкладені .box елементи підсвічено синім.");
+			});
+
+			$("#sliceBtn").on("click", function () {
+				$(".box").slice(1, 4).addClass("highlight");
+				alert("Елементи з 2 по 4 підсвічено.");
+			});
+
+			$("#notBtn").on("click", function () {
+				$(".box").not(":first").css("opacity", "0.5");
+				alert("Усі .box елементи, крім першого, затемнені.");
+			});
+		});
+	</script>
+</head>
+<body>
+<a href="../../index.html" style="display: block; text-align: right; margin-bottom: 10px;">На головну</a>
+<a href="index-lab-11.html" style="display: block; text-align: right; margin-bottom: 20px;">Лабораторна робота 11</a>
+
+<div class="container" id="parentContainer">
+	<div class="box">Елемент 1</div>
+	<div class="box">Елемент 2</div>
+	<div class="box">Елемент 3</div>
+	<div class="box">Елемент 4</div>
+	<div class="box">Елемент 5</div>
+</div>
+
+<div style="text-align: center;">
+	<button id="endBtn">.end()</button>
+	<button id="firstBtn">.first()</button>
+	<button id="offsetParentBtn">.offsetParent()</button>
+	<button id="findBtn">.find()</button>
+	<button id="sliceBtn">.slice()</button>
+	<button id="notBtn">.not()</button>
+</div>
+</body>
+</html>
